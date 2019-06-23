@@ -1,4 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'reusable_card.dart';
+import 'icon_content.dart';
+
+const activeCardColour = Color(0XFF1D1E33);
+const cardColour = Color(0XFF111328);
+
+const bottomButtonHeight = 80.0;
+const bottomContainerColor = Color(0XFFEB1555);
 
 class InputPage extends StatefulWidget {
   @override
@@ -6,6 +15,8 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
+  Gender selectedGender;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,11 +34,40 @@ class _InputPageState extends State<InputPage> {
                   children: <Widget>[
                     Expanded(
                       flex: 1,
-                      child: ReusableCard(colour: Color(0XFF1D1E33)),
+                      child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            selectedGender = Gender.male;
+                          });
+                        },
+                        child: ReusableCard(
+                          colour: selectedGender == Gender.male
+                              ? activeCardColour
+                              : cardColour,
+                          cardChild: IconContent(
+                            icon: FontAwesomeIcons.mars,
+                            label: 'MALE',
+                          ),
+                        ),
+                      ),
                     ),
                     Expanded(
                       flex: 1,
-                      child: ReusableCard(colour: Color(0XFF1D1E33)),
+                      child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            selectedGender = Gender.female;
+                          });
+                        },
+                        child: ReusableCard(
+                            colour: selectedGender == Gender.female
+                                ? activeCardColour
+                                : cardColour,
+                            cardChild: IconContent(
+                              icon: FontAwesomeIcons.venus,
+                              label: 'FEMALE',
+                            )),
+                      ),
                     )
                   ],
                 ),
@@ -39,7 +79,7 @@ class _InputPageState extends State<InputPage> {
                   children: <Widget>[
                     Expanded(
                       flex: 1,
-                      child: ReusableCard(colour: Color(0XFF1D1E33)),
+                      child: ReusableCard(colour: activeCardColour),
                     ),
                   ],
                 ),
@@ -51,31 +91,26 @@ class _InputPageState extends State<InputPage> {
                   children: <Widget>[
                     Expanded(
                       flex: 1,
-                      child: ReusableCard(colour: Color(0XFF1D1E33)),
+                      child: ReusableCard(colour: activeCardColour),
                     ),
                     Expanded(
                       flex: 1,
-                      child: ReusableCard(colour: Color(0XFF1D1E33)),
+                      child: ReusableCard(colour: activeCardColour),
                     ),
                   ],
                 ),
-              )
+              ),
+              Container(
+                color: bottomContainerColor,
+                child: MaterialButton(
+                  onPressed: null,
+                  minWidth: double.infinity,
+                  height: bottomButtonHeight,
+                  child: Text('Calcola'),
+                ),
+              ),
             ],
           ),
         ));
-  }
-}
-
-class ReusableCard extends StatelessWidget {
-  final Color colour;
-
-  ReusableCard({@required this.colour});
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      color: colour,
-      margin: EdgeInsets.all(10.0),
-    );
   }
 }
