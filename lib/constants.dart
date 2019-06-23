@@ -14,5 +14,5 @@ const kTextStyle = TextStyle(
 const kTextNumberStyle = TextStyle(
   fontSize: 50.0,
   color: cardTextColour,
-  fontWeight: FontWeight.w900;
+  fontWeight: FontWeight.w900,
 );
