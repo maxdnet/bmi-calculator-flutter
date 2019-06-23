@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'constants.dart';
 
 class IconContent extends StatelessWidget {
-  final _cardTextColour = Colors.white70;
-  final _cardTextSize = 18.0;
   final _cardIconSize = 80.0;
 
   final String label;
@@ -24,7 +23,7 @@ class IconContent extends StatelessWidget {
         ),
         Text(
           label,
-          style: TextStyle(fontSize: _cardTextSize, color: _cardTextColour),
+          style: kTextStyle,
         )
       ],
     );

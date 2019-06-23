@@ -2,12 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'reusable_card.dart';
 import 'icon_content.dart';
-
-const activeCardColour = Color(0XFF1D1E33);
-const cardColour = Color(0XFF111328);
-
-const bottomButtonHeight = 80.0;
-const bottomContainerColor = Color(0XFFEB1555);
+import 'number_content.dart';
+import 'constants.dart';
 
 class InputPage extends StatefulWidget {
   @override
@@ -16,6 +12,12 @@ class InputPage extends StatefulWidget {
 
 class _InputPageState extends State<InputPage> {
   Gender selectedGender;
+
+  selectGender(Gender g) {
+    setState(() {
+      selectedGender = g;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,40 +36,32 @@ class _InputPageState extends State<InputPage> {
                   children: <Widget>[
                     Expanded(
                       flex: 1,
-                      child: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            selectedGender = Gender.male;
-                          });
+                      child: ReusableCard(
+                        onPress: () {
+                          selectGender(Gender.male);
                         },
-                        child: ReusableCard(
-                          colour: selectedGender == Gender.male
-                              ? activeCardColour
-                              : cardColour,
-                          cardChild: IconContent(
-                            icon: FontAwesomeIcons.mars,
-                            label: 'MALE',
-                          ),
+                        colour: selectedGender == Gender.male
+                            ? kActiveCardColour
+                            : kCardColour,
+                        cardChild: IconContent(
+                          icon: FontAwesomeIcons.mars,
+                          label: 'MALE',
                         ),
                       ),
                     ),
                     Expanded(
                       flex: 1,
-                      child: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            selectedGender = Gender.female;
-                          });
-                        },
-                        child: ReusableCard(
-                            colour: selectedGender == Gender.female
-                                ? activeCardColour
-                                : cardColour,
-                            cardChild: IconContent(
-                              icon: FontAwesomeIcons.venus,
-                              label: 'FEMALE',
-                            )),
-                      ),
+                      child: ReusableCard(
+                          onPress: () {
+                            selectGender(Gender.female);
+                          },
+                          colour: selectedGender == Gender.female
+                              ? kActiveCardColour
+                              : kCardColour,
+                          cardChild: IconContent(
+                            icon: FontAwesomeIcons.venus,
+                            label: 'FEMALE',
+                          )),
                     )
                   ],
                 ),
@@ -79,7 +73,15 @@ class _InputPageState extends State<InputPage> {
                   children: <Widget>[
                     Expanded(
                       flex: 1,
-                      child: ReusableCard(colour: activeCardColour),
+                      child: ReusableCard(
+                        colour: kActiveCardColour,
+                        cardChild: NumberContent(
+                          label: 'HEIGHT',
+                          onSliding: (double newValue) {
+                            setState(() {});
+                          },
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -91,21 +93,21 @@ class _InputPageState extends State<InputPage> {
                   children: <Widget>[
                     Expanded(
                       flex: 1,
-                      child: ReusableCard(colour: activeCardColour),
+                      child: ReusableCard(colour: kActiveCardColour),
                     ),
                     Expanded(
                       flex: 1,
-                      child: ReusableCard(colour: activeCardColour),
+                      child: ReusableCard(colour: kActiveCardColour),
                     ),
                   ],
                 ),
               ),
               Container(
-                color: bottomContainerColor,
+                color: kBottomContainerColor,
                 child: MaterialButton(
                   onPressed: null,
                   minWidth: double.infinity,
-                  height: bottomButtonHeight,
+                  height: kBottomButtonHeight,
                   child: Text('Calcola'),
                 ),
               ),
