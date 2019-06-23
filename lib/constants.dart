@@ -16,3 +16,5 @@ const kTextNumberStyle = TextStyle(
   color: cardTextColour,
   fontWeight: FontWeight.w900,
 );
+
+const kHeight = 180;

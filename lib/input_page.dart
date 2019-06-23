@@ -12,7 +12,7 @@ class InputPage extends StatefulWidget {
 
 class _InputPageState extends State<InputPage> {
   Gender selectedGender;
-
+  int height = kHeight;
   selectGender(Gender g) {
     setState(() {
       selectedGender = g;
@@ -70,6 +70,7 @@ class _InputPageState extends State<InputPage> {
                 flex: 4,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Expanded(
                       flex: 1,
@@ -77,6 +78,7 @@ class _InputPageState extends State<InputPage> {
                         colour: kActiveCardColour,
                         cardChild: NumberContent(
                           label: 'HEIGHT',
+                          height: height,
                           onSliding: (double newValue) {
                             setState(() {});
                           },

@@ -32,14 +32,14 @@ class NumberContent extends StatelessWidget {
               'CM',
               style: kTextStyle,
             ),
-            Slider(
-              value: height.toDouble(),
-              min: 120,
-              max: 220,
-              divisions: 1,
-              onChanged: onSliding,
-            )
           ],
+        ),
+        Slider(
+          value: height.toDouble(),
+          min: 120,
+          max: 220,
+          divisions: 1,
+          onChanged: onSliding,
         )
       ],
     );
