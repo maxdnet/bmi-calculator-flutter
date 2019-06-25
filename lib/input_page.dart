@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'reusable_card.dart';
 import 'icon_content.dart';
-import 'number_content.dart';
+import 'slider_content.dart';
+import 'round_icon_button.dart';
 import 'constants.dart';
 
 class InputPage extends StatefulWidget {
@@ -13,6 +14,9 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
   Gender selectedGender;
   int height = kHeight;
+  int weight = kWeight;
+  int age = kAge;
+
   selectGender(Gender g) {
     setState(() {
       selectedGender = g;
@@ -30,7 +34,7 @@ class _InputPageState extends State<InputPage> {
           child: Column(
             children: <Widget>[
               Expanded(
-                flex: 4,
+                //flex: 4,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
@@ -67,7 +71,7 @@ class _InputPageState extends State<InputPage> {
                 ),
               ),
               Expanded(
-                flex: 4,
+                //flex: 4,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -76,11 +80,13 @@ class _InputPageState extends State<InputPage> {
                       flex: 1,
                       child: ReusableCard(
                         colour: kActiveCardColour,
-                        cardChild: NumberContent(
+                        cardChild: SliderContent(
                           label: 'HEIGHT',
                           height: height,
                           onSliding: (double newValue) {
-                            setState(() {});
+                            setState(() {
+                              height = newValue.toInt();
+                            });
                           },
                         ),
                       ),
@@ -89,17 +95,91 @@ class _InputPageState extends State<InputPage> {
                 ),
               ),
               Expanded(
-                flex: 4,
+                //flex: 4,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
                     Expanded(
                       flex: 1,
-                      child: ReusableCard(colour: kActiveCardColour),
+                      child: ReusableCard(
+                        colour: kActiveCardColour,
+                        cardChild: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              'WEIGHT',
+                              style: kTextStyle,
+                            ),
+                            Text(
+                              weight.toString(),
+                              style: kTextNumberStyle,
+                            ),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: <Widget>[
+                                RoundIconButton(
+                                  icon: Icons.remove,
+                                  onPress: () {
+                                    setState(() {
+                                      weight = weight - 1;
+                                    });
+                                  },
+                                ),
+                                RoundIconButton(
+                                  icon: Icons.add,
+                                  onPress: () {
+                                    setState(() {
+                                      weight = weight + 1;
+                                    });
+                                  },
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
                     ),
                     Expanded(
                       flex: 1,
-                      child: ReusableCard(colour: kActiveCardColour),
+                      child: ReusableCard(
+                        colour: kActiveCardColour,
+                        cardChild: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              'AGE',
+                              style: kTextStyle,
+                            ),
+                            Text(
+                              age.toString(),
+                              style: kTextNumberStyle,
+                            ),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: <Widget>[
+                                RoundIconButton(
+                                  icon: Icons.remove,
+                                  onPress: () {
+                                    setState(() {
+                                      age = age - 1;
+                                    });
+                                  },
+                                ),
+                                RoundIconButton(
+                                  icon: Icons.add,
+                                  onPress: () {
+                                    setState(() {
+                                      age = age + 1;
+                                    });
+                                  },
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -110,7 +190,10 @@ class _InputPageState extends State<InputPage> {
                   onPressed: null,
                   minWidth: double.infinity,
                   height: kBottomButtonHeight,
-                  child: Text('Calcola'),
+                  child: Text(
+                    'CALCOLA',
+                    style: kTextStyle,
+                  ),
                 ),
               ),
             ],

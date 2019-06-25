@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'constants.dart';
 
-class NumberContent extends StatelessWidget {
+class SliderContent extends StatelessWidget {
   final String label;
   final int height;
   final Function onSliding;
-  NumberContent({this.label, this.height, this.onSliding});
+  SliderContent({this.label, this.height, this.onSliding});
 
   @override
   Widget build(BuildContext context) {
@@ -16,16 +16,16 @@ class NumberContent extends StatelessWidget {
           label,
           style: kTextStyle,
         ),
-        SizedBox(
+        /*SizedBox(
           height: 15.0,
-        ),
+        ),*/
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.baseline,
           textBaseline: TextBaseline.alphabetic,
           children: <Widget>[
             Text(
-              '180',
+              height.toString(),
               style: kTextNumberStyle,
             ),
             Text(
@@ -34,12 +34,19 @@ class NumberContent extends StatelessWidget {
             ),
           ],
         ),
-        Slider(
-          value: height.toDouble(),
-          min: 120,
-          max: 220,
-          divisions: 1,
-          onChanged: onSliding,
+        SliderTheme(
+          data: SliderTheme.of(context).copyWith(
+              thumbShape: RoundSliderThumbShape(enabledThumbRadius: 15.0),
+              overlayShape: RoundSliderOverlayShape(overlayRadius: 30.0)),
+          child: Slider(
+            value: height.toDouble(),
+            min: 120,
+            max: 220,
+            //divisions: 1,
+            activeColor: kBottomContainerColor,
+            inactiveColor: Color(0XFF8D8E98),
+            onChanged: onSliding,
+          ),
         )
       ],
     );
