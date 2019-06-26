@@ -5,6 +5,8 @@ import 'icon_content.dart';
 import 'slider_content.dart';
 import 'round_icon_button.dart';
 import 'constants.dart';
+import 'bmi_brain.dart';
+import 'result_page.dart';
 
 class InputPage extends StatefulWidget {
   @override
@@ -187,7 +189,16 @@ class _InputPageState extends State<InputPage> {
               Container(
                 color: kBottomContainerColor,
                 child: MaterialButton(
-                  onPressed: null,
+                  onPressed: () {
+                    BmiBrain bmi = BmiBrain(height: height, weight: weight);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ResultPage(
+                                  bmiBrain: bmi,
+                                )));
+                    //Navigator.pushNamed(context, '/result', arguments: bmi);
+                  },
                   minWidth: double.infinity,
                   height: kBottomButtonHeight,
                   child: Text(
